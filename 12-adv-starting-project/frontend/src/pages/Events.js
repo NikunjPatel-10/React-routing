@@ -1,35 +1,32 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 import EventsList from '../components/EventsList';
+import { useLoaderData } from 'react-router-dom';
 
 function Events() {
-    const [isLoading, setIsLoading] = useState(false);
-    const [fetchedEvents, setFetchedEvents] = useState();
-    const [error, setError] = useState();
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [fetchedEvents, setFetchedEvents] = useState();
+    // const [error, setError] = useState();
 
-    useEffect(() => {
-        async function fetchEvents() {
-            setIsLoading(true);
-            const response = await fetch('http://localhost:8080/events');
+    // useEffect(() => {
+    //     async function fetchEvents() {
+    //         setIsLoading(true);
 
-            if (!response.ok) {
-                setError('Fetching events failed.');
-            } else {
-                const resData = await response.json();
-                setFetchedEvents(resData.events);
-            }
-            setIsLoading(false);
-        }
+    //         setIsLoading(false);
+    //     }
 
-        fetchEvents();
-    }, []);
+    //     fetchEvents();
+    // }, []);
+
+    const events = useLoaderData()
     return (
         <>
-            <div style={{ textAlign: 'center' }}>
+            {/* <div style={{ textAlign: 'center' }}>
                 {isLoading && <p>Loading...</p>}
                 {error && <p>{error}</p>}
-            </div>
-            {!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />}
+            </div> */}
+            {/* {!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />} */}
+            {<EventsList events={events} />}
         </>
     );
 }
